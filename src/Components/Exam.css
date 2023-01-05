@@ -1,0 +1,57 @@
+body {
+    background: rgb(2, 0, 36);
+    background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(0, 212, 255, 1) 0%, rgba(0, 9, 121, 1) 100%);
+    font-size: larger;
+    text-align: justify;
+    text-decoration: solid;
+    font-family: emoji;
+    font-size: larger;
+    color: darkblue;
+    text-decoration: bold;
+    font-weight: bold;
+}
+
+div{
+    text-align: center;
+}
+
+button {
+    color: aqua;
+    background-color: black;
+    margin: 5px;
+}
+
+button :hover {
+    background-color: red;
+}
+
+.option {
+    display: initial;
+    margin: 5px;
+}
+
+input [type="radio"]{
+    height: 50px;
+    width: 50px;
+}
+
+.span {
+    padding: 5px;
+}
+
+.result{
+    text-decoration: solid;
+    font-family: emoji;
+    font-size: larger;
+    color: darkblue;
+    text-decoration: bold;
+    font-weight: bold;
+}
+
+.mcq{
+    border: 2px white solid;
+    padding: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column
+}

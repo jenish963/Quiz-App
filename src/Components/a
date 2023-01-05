@@ -1,0 +1,133 @@
+ const input = (e) => {
+    //setAns((ans) => ans, e.target.value)
+    setAns({...ans,
+      [e.target.name]: e.target.value})
+  }
+
+  console.log(ans);
+
+  const handlePrevious = (e) => {
+    setCurrent(current - 1)
+
+      let allRadio = document.querySelectorAll('.radioButton')
+
+      console.log(selectedAns[(current)].selectedAns);
+
+      allRadio.forEach(value => {
+        if(selectedAns[current].selectedAns === value.value){
+          value.checked = true
+        }
+      })
+
+
+  }
+
+  const handlerSave = () => {
+    if (data[current].answer === ans) {
+      setCorrect(correct + 1)
+    }
+
+    if ((current + 1) === data.length){
+      setExit(true)
+    }
+    else {
+    setCurrent(current + 1)
+    }
+
+    let allRadio = document.querySelectorAll('.radioButton')
+    allRadio.forEach(value => value.checked = false)
+
+    const answers = JSON.parse(localStorage.getItem("Ans") || "[]")
+    answers.push(ans)
+    localStorage.setItem('Ans', JSON.stringify(answers))
+
+    // if(handlePrevious()){
+    // answers.splice(ans[current],answers[current],1)}
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  import React, {useState} from 'react'
+import Result from './Result'
+import './Exam.css'
+
+function Exam() {
+
+  const data = JSON.parse(localStorage.getItem('Que'))
+
+  const [current, setCurrent] = useState(0)
+  const [ans, setAns] = useState("")
+  const [correct, setCorrect] = useState(0)
+  const [exit, setExit] = useState(false)
+
+  const input = (e) => {
+    //setAns((ans) => ans, e.target.value)
+    setAns(...ans, e.target.value)
+  }
+
+  const handlePrevious = (e) => {
+    setCurrent(current - 1)
+      let allRadio = document.querySelectorAll('.radioButton')
+      console.log(ans);
+      allRadio.forEach(value => {
+        if(ans === value.value){
+          value.checked = true
+        }
+      })
+  }
+
+  const handlerSave = () => {
+    if (data[current].answer === ans) {
+      setCorrect(correct + 1)
+    }
+
+    if ((current + 1) === data.length){
+      setExit(true)
+    }
+    else {
+    setCurrent(current + 1)
+    }
+
+    let allRadio = document.querySelectorAll('.radioButton')
+    allRadio.forEach(value => value.checked = false)
+
+  }
+
+  return(
+    <div>
+      { exit === false ?
+      <div className='mcq'>
+      <div>
+        Question :<span className='span'>{current + 1}</span>    
+        {data[current].question}?
+      </div><br/>
+      <div>
+        <div className='option'><input type='radio' value='A' name='answer' onChange={input} className='radioButton'/> {data[current].A} </div>
+        <div className='option'><input type='radio' value='B' name='answer' onChange={input} className='radioButton'/> {data[current].B} </div>
+        <div className='option'><input type='radio' value='C' name='answer' onChange={input} className='radioButton'/> {data[current].C} </div>
+        <div className='option'><input type='radio' value='D' name='answer' onChange={input} className='radioButton'/> {data[current].D} </div>
+      </div><br/>
+      <div>
+        { current !== 0 && <button onClick={handlePrevious}>Previous</button>}
+        <button onClick={handlerSave}>Save & Next</button>
+      </div>
+      </div> :
+      <Result props={{correct}}/>
+      }
+    </div>
+  )
+}
+
+export default Exam;
